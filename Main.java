@@ -159,7 +159,6 @@ class BMath{
     }
 
     static int npr(int n , int r){
-        fact();
         int nem = ft[n];
         int den = ft[n-r];
         return (int)((nem*(long)power(den,mod-2))%mod);
@@ -169,24 +168,22 @@ class BMath{
 /*<--------------------------------MATRIX-------------------------------->*/
 class Matrix{
 
-    int n;
-    int mat[][];
+    static int l;
+    static int mat[][];
 
     static int mod = (int)1e9+7;
-    Matrix(int  arr[][]){
-        this.mat = arr;
-        this.n = arr.length;
-    }
 
-    int[][] pow(long n){
+    public static int[][] power(int[][] matrix , long n){
+        mat = matrix;
+        l = mat.length;
         return power(n);
     }
 
-    int [][] power(long n){
+    private static int [][] power(long n){
         if(n==1){
-            int te[][] = new int[this.n][this.n];
-            for(int i = 0 ; i < this.n ; i++)
-                for(int j = 0 ; j < this.n ; j++)
+            int te[][] = new int[l][l];
+            for(int i = 0 ; i < l ; i++)
+                for(int j = 0 ; j < l ; j++)
                     te[i][j]=mat[i][j];
             return te;
         }
@@ -198,7 +195,7 @@ class Matrix{
         return temp;
     }
 
-    static int [][] mul(int [][]m2 , int [][]m1){
+    public static int [][] mul(int [][]m2 , int [][]m1){
         int n = m1.length;
         int arr[][] = new int[n][n];
         for(int i = 0 ; i < n ; i++){
