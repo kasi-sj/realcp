@@ -3,6 +3,7 @@ import java.util.*;
 public class Main {
     static FastReader fr ;
     static PrintWriter pw;
+    static int mod = (int)1e9+7;
     public static void main(String[] args) {
         fr = new FastReader();
         pw = new PrintWriter(System.out);
