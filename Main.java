@@ -4,9 +4,20 @@ public class Main {
     static FastReader fr ;
     static PrintWriter pw;
     static int mod = (int)1e9+7;
+    static {
+        try {
+            fr = new FastReader();
+            File file = new File("output.txt");
+            if (file.exists()) {
+                pw = new PrintWriter(file);
+            } else {
+                pw = new PrintWriter(System.out);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
-        fr = new FastReader();
-        pw = new PrintWriter(System.out);
         int t = fr.nextInt();
         while(t-->0) {
             start();
@@ -17,8 +28,19 @@ public class Main {
     private static void start(){
         int n = fr.nextInt();
         int k = fr.nextInt();
-        int ans = n+k;
-        pw.println(ans);
+        int arr[] = new int[n];
+        for(int i = 0 ; i < n ; i++)arr[i] = fr.nextInt();
+        int flag = (1<<31)-1;
+        for(int i : arr){
+            if((k&i)==k){
+                flag&=i;
+            }
+        }
+        if(flag==k){
+            pw.println("YES");
+        }else{
+            pw.println("NO");
+        }
     }
 }
 
@@ -28,7 +50,16 @@ class FastReader {
     StringTokenizer st;
 
     public FastReader() {
-        br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            File file = new File("input.txt");
+            if (file.exists()) {
+                br = new BufferedReader(new FileReader(file));
+            } else {
+                br = new BufferedReader(new InputStreamReader(System.in));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     String next() {
@@ -64,6 +95,37 @@ class FastReader {
         return str;
     }
 }
+
+/*<--------------------------------WRITER-------------------------------->*/
+class FastWriter {
+    PrintWriter pw;
+
+    public FastWriter() {
+        try {
+            File file = new File("output.txt");
+            if (file.exists()) {
+                pw = new PrintWriter(file);
+            } else {
+                pw = new PrintWriter(System.out);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void print(String text) {
+        pw.print(text);
+    }
+
+    public void println(String text) {
+        pw.println(text);
+    }
+
+    public void close() {
+        pw.close();
+    }
+}
+
 
 /*<--------------------------------BASIC_MATH-------------------------------->*/
 class BMath{
@@ -242,7 +304,6 @@ class Ertho{
 }
 
 /*<--------------------------------PAIR-------------------------------->*/
-
 class Pair implements Comparable{
     int first;
     int second;
@@ -292,7 +353,6 @@ class Pair implements Comparable{
 /*<--------------------------------DATA_STRUCTURE-------------------------------->*/
 
 /*<--------------------------------DISJOINT_SET-------------------------------->*/
-
 class DisjointSet{
     int size[];
     int pare[];
@@ -336,8 +396,6 @@ class DisjointSet{
 }
 
 /*<--------------------------------FENWICK_TREE-------------------------------->*/
-
-
 class fenwick{
     int n;
     int arr[];
@@ -379,8 +437,6 @@ class fenwick{
 }
 
 /*<--------------------------------SEGMENT_TREE-------------------------------->*/
-
-
 class Root{
     int val;
     int left;
@@ -531,7 +587,6 @@ class segmentF{
 }
 
 /*<--------------------------------SPARSE_TABLE-------------------------------->*/
-
 class sparseTable{
     int n;
     int arr[];
@@ -570,9 +625,6 @@ class sparseTable{
 }
 
 /*<--------------------------------TRIE-------------------------------->*/
-
-
-
 class node{
     node[] link;
     boolean flag ;
@@ -596,7 +648,6 @@ class node{
         link[c-'a']=new node();
     }
 }
-
 
 class Trie{
     node root;
